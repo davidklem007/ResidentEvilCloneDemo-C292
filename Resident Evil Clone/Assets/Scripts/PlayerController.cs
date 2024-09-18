@@ -74,6 +74,10 @@ public class PlayerController : MonoBehaviour
         {
             isGrounded = true;
         }
+        if (collision.gameObject.tag == "Other Ground")
+        {
+            isGrounded = true;
+        }
 
     }
 
