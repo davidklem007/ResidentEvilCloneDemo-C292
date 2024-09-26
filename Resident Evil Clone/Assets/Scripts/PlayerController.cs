@@ -16,6 +16,9 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private Transform firePoint;
 
+    [SerializeField] Weapon currentWeapon;
+    private List<IPickupable> inventory = new List<IPickupable>();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,7 +39,8 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(0))
         {
-            Shoot();
+            //Shoot();
+            currentWeapon.Fire();
         }
     }
 
@@ -76,13 +80,14 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Ground")
+        if(collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Other Ground")
         {
             isGrounded = true;
         }
-        if (collision.gameObject.tag == "Other Ground")
+        else if(collision.gameObject.GetComponent<IPickupable>() != null)
         {
-            isGrounded = true;
+            inventory.Add(collision.gameObject.GetComponent<IPickupable>());
+            collision.gameObject.GetComponent<IPickupable>().Pickup(this);
         }
 
     }
@@ -108,6 +113,22 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+
+    public void AttemptReload()
+    {
+        if(currentWeapon != null)
+        {
+            Enums.MagazineType gunMagazineType = currentWeapon.magazineType;
+
+            foreach(IPickupable item in inventory)
+            {
+
+            }
+        }
+    }
+
+
+
     /*
     private void ShootBullet()
     {

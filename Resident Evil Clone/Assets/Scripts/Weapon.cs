@@ -9,6 +9,10 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField] protected int currrentSpareAmmo;
     [SerializeField] protected bool canFire;
     [SerializeField] protected Transform firePoint;
+
+
+    [SerializeField] Magazine magazine;
+    [SerializeField] Enums.MagazineType magazineType;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,8 +25,14 @@ public abstract class Weapon : MonoBehaviour
         
     }
 
-    protected virtual void Reload()
+    public virtual void Reload()
     {
+        if(magazine != null)
+        {
+
+        }
+
+        /*
         if (currrentLoadedAmmo < ammoCapacity)
         {
             if(currrentSpareAmmo > 0)
@@ -40,19 +50,28 @@ public abstract class Weapon : MonoBehaviour
             }
             
         }
+        */
     }
 
-    protected virtual void Fire()
+    public virtual void Fire()
     {
-        RaycastHit hit;
-
-        if (Physics.Raycast(firePoint.position, firePoint.forward, out hit, 100))
+        if(magazine != null)
         {
-            Debug.DrawRay(firePoint.position, firePoint.forward * hit.distance, Color.red, 2f);
-            if (hit.transform.CompareTag("Zombie"))
+            if(magazine.GetRounds() > 0)
             {
-                hit.transform.GetComponent<Enemy>().TakeDamage(1);
+                magazine.RemoveRound();
+                RaycastHit hit;
+
+                if (Physics.Raycast(firePoint.position, firePoint.forward, out hit, 100))
+                {
+                    Debug.DrawRay(firePoint.position, firePoint.forward * hit.distance, Color.red, 2f);
+                    if (hit.transform.CompareTag("Zombie"))
+                    {
+                        hit.transform.GetComponent<Enemy>().TakeDamage(1);
+                    }
+                }
             }
         }
+
     }
 }

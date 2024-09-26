@@ -16,7 +16,7 @@ public class Pew : Weapon
         
     }
 
-    protected override void Fire()
+    public override void Fire()
     {
         base.Fire();
     }
