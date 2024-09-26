@@ -12,7 +12,7 @@ public abstract class Weapon : MonoBehaviour
 
 
     [SerializeField] Magazine magazine;
-    [SerializeField] Enums.MagazineType magazineType;
+    [SerializeField] public Enums.MagazineType magazineType;
     // Start is called before the first frame update
     void Start()
     {

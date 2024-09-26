@@ -122,7 +122,13 @@ public class PlayerController : MonoBehaviour
 
             foreach(IPickupable item in inventory)
             {
+                if(item is Magazine)
+                {
+                    if(item.gameObject.GetComponent<Magazine>() GetMagazineType)
+                    {
 
+                    }
+                }
             }
         }
     }

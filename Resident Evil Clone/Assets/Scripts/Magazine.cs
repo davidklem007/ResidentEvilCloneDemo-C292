@@ -8,12 +8,14 @@ public class Magazine : MonoBehaviour, IPickupable
     [SerializeField] int currentCount;
     [SerializeField] Enums.MagazineType magazineType;
 
+    /*
     public enum MagazineType
     {
         Rifle,
         Pistol,
         Shotgun
     }
+    */
 
     // Start is called before the first frame update
     void Start()
